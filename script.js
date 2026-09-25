@@ -71,17 +71,18 @@ ButtonBox.onclick = function() {
     function SearchResult(hotel) {
         let typeword = []
         hotel.forEach(Obj => {
-            if (Obj.hotel_name === typeword || Obj.city === typeword)
+            if (Obj.HotelName.toLowerCase() === typeword || Obj.City.toLowerCase() === typeword)
                 typeword.push(Obj);
         });
         return typeword
     }
 
     let res = SearchResult(hotel) 
-    if (SearchResult.length == 0) {
+    if (res.length == 0) {
         OutputBox.innerHTML = "<p>No Hotel</p>";
-    } else {
-        SearchResult.forEach(h => {
+    } 
+    else {
+        res.forEach(h => {
         OutputBox.innerHTML += `
         <div>
             <h2>${h.HotelName}</h2>
