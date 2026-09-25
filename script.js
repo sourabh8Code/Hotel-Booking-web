@@ -58,52 +58,70 @@ const hotel = [
     }
 ]
 
-//Declare the html id and use in the 
+//Declare the html element with id and used to store the variable in the javascript
 const SearchBox = document.getElementById("Searchspace");
 const ButtonBox = document.getElementById("userBtn");
 const OutputBox = document.getElementById("hotelList");
 const ConfirmBox = document.getElementById("add");
 
-ButtonBox.onclick = function() {
-    OutputBox.innerHTML = "";
+//Create the button function which is declare above 
+ButtonBox.onclick = function () {
+    OutputBox.innerHTML = "";            //Remove the html content in the output box 
     ConfirmBox.textContent = "";
 
+    //We storing the user input and remove the whitespace and making lowercase.
     let typeword = SearchBox.value.trim().toLowerCase();
+
+    //
     function SearchResult(hotel) {
         let matchhotel = [];
+        // "forEach" method is use to excuate the every element of the array 
         hotel.forEach(obj => {
+            //Here calling the oject name and making them lowercase then to the user type word 
             if (obj.HotelName.toLowerCase() === typeword || obj.City.toLowerCase() === typeword)
-                matchhotel.push(obj);
+                matchhotel.push(obj);      //if we found the match word we push that name 
         });
-        return matchhotel;
+        return matchhotel; // then the return the value to the function 
     }
 
-    let res = SearchResult(hotel) 
+    let res = SearchResult(hotel)
     if (res.length == 0) {
         OutputBox.innerHTML = "<p>No Hotel</p>";
-    } 
+    }
     else {
         res.forEach(h => {
-        OutputBox.innerHTML += `
+            OutputBox.innerHTML += `
         <div>
             <h2>${h.HotelName}</h2>
             <p>City: ${h.City}</p>
             <p>Rating: ${h.Rating}, Price: ${h.Price}</p>
+            <button onclick ="Booking()">Booked</button>
         </div>
         `
         });
     }
+
+
+
+    function Booking(hotel) {
+        let result = confirm("Press Ok to book the hotel");
+        if (result === true) {
+            ConfirmBox.textContent = "Booked";
+            console.log("Booked done");
+        } else {
+            ConfirmBox.textContent = "Cancelled";
+            console.log("Not Booked");
+        }
+    }
 }
 
-    // let ConfirmBox = confirm("Press Ok to book the hotel");
-    // if (ConfirmBox === true) {
-    //     document.getElementById("add").textContent = "Booked";
-    //     console.log("Booked done");
-    // } else {
-    //     document.getElementById("add").textContent = "Cancelled";
-    //     console.log("Not Booked");
-    // }
-//  let searchresult = hotel.filter(obj => obj.hotel_name === typeword || obj.city === typeword);
+
+
+
+
+
+
+
 
 
 
