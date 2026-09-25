@@ -58,6 +58,7 @@ const hotel = [
     }
 ]
 
+//Declare the html id and use in the 
 const SearchBox = document.getElementById("Searchspace");
 const ButtonBox = document.getElementById("userBtn");
 const OutputBox = document.getElementById("hotelList");
@@ -69,12 +70,12 @@ ButtonBox.onclick = function() {
 
     let typeword = SearchBox.value.trim().toLowerCase();
     function SearchResult(hotel) {
-        let typeword = []
-        hotel.forEach(Obj => {
-            if (Obj.HotelName.toLowerCase() === typeword || Obj.City.toLowerCase() === typeword)
-                typeword.push(Obj);
+        let matchhotel = [];
+        hotel.forEach(obj => {
+            if (obj.HotelName.toLowerCase() === typeword || obj.City.toLowerCase() === typeword)
+                matchhotel.push(obj);
         });
-        return typeword
+        return matchhotel;
     }
 
     let res = SearchResult(hotel) 
