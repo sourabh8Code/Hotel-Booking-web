@@ -63,44 +63,46 @@ const ButtonBox = document.getElementById("userBtn");
 const OutputBox = document.getElementById("hotelList");
 const ConfirmBox = document.getElementById("add");
 
-ButtonBox.onclick = function () {
+ButtonBox.onclick = function() {
     OutputBox.innerHTML = "";
     ConfirmBox.textContent = "";
 
     let typeword = SearchBox.value.trim().toLowerCase();
-
-    //  let searchresult = hotel.filter(obj => obj.hotel_name === typeword || obj.city === typeword);
     function SearchResult(hotel) {
         let typeword = []
         hotel.forEach(Obj => {
             if (Obj.hotel_name === typeword || Obj.city === typeword)
-                SearchBox.push(Obj);
+                typeword.push(Obj);
         });
-        return SearchBox
+        return typeword
     }
 
+    let res = SearchResult(hotel) 
     if (SearchResult.length == 0) {
         OutputBox.innerHTML = "<p>No Hotel</p>";
     } else {
+        SearchResult.forEach(h => {
         OutputBox.innerHTML += `
         <div>
-            <h2>${HotelName}</h2>
-            <p>City: ${City}</p>
-            <p>Rating: ${Rating}, Price: ${Price}</p>
+            <h2>${h.HotelName}</h2>
+            <p>City: ${h.City}</p>
+            <p>Rating: ${h.Rating}, Price: ${h.Price}</p>
         </div>
         `
+        });
     }
-
-    let ConfirmBox = confirm("Press Ok to book the hotel");
-    if (ConfirmBox === true) {
-        document.getElementById("add").textContent = "Booked";
-        console.log("Booked done");
-    } else {
-        document.getElementById("add").textContent = "Cancelled";
-        console.log("Not Booked");
-    }
-
 }
+
+    // let ConfirmBox = confirm("Press Ok to book the hotel");
+    // if (ConfirmBox === true) {
+    //     document.getElementById("add").textContent = "Booked";
+    //     console.log("Booked done");
+    // } else {
+    //     document.getElementById("add").textContent = "Cancelled";
+    //     console.log("Not Booked");
+    // }
+//  let searchresult = hotel.filter(obj => obj.hotel_name === typeword || obj.city === typeword);
+
 
 
 
