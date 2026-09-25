@@ -72,9 +72,9 @@ ButtonBox.onclick = function () {
     //We storing the user input and remove the whitespace and making lowercase.
     let typeword = SearchBox.value.trim().toLowerCase();
 
-    //
+    // Create a function for the searching the hotel list 
     function SearchResult(hotel) {
-        let matchhotel = [];
+        let matchhotel = [];              //Declare the variable 
         // "forEach" method is use to excuate the every element of the array 
         hotel.forEach(obj => {
             //Here calling the oject name and making them lowercase then to the user type word 
@@ -84,6 +84,7 @@ ButtonBox.onclick = function () {
         return matchhotel; // then the return the value to the function 
     }
 
+    //We are storing the array result 
     let res = SearchResult(hotel)
     if (res.length == 0) {
         OutputBox.innerHTML = "<p>No Hotel</p>";
