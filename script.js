@@ -70,56 +70,56 @@ ButtonBox.onclick = function () {
     ConfirmBox.textContent = "";
 
     //We storing the user input and remove the whitespace and making lowercase.
-    let typeword = SearchBox.value.trim().toLowerCase();
+    let typeword = SearchBox.value.trim().toUpperCase();
 
-    // Create a function for the searching the hotel list 
+    //
     function SearchResult(hotel) {
-        let matchhotel = [];              //Declare the variable 
+        let matchhotel = [];
         // "forEach" method is use to excuate the every element of the array 
         hotel.forEach(obj => {
             //Here calling the oject name and making them lowercase then to the user type word 
-            if (obj.HotelName.toLowerCase() === typeword || obj.City.toLowerCase() === typeword)
+            if (obj.HotelName.toUpperCase() === typeword || obj.City.toUpperCase() === typeword)
                 matchhotel.push(obj);      //if we found the match word we push that name 
         });
         return matchhotel; // then the return the value to the function 
     }
-
-    //We are storing the array result 
+    
+    //Here we call the function
     let res = SearchResult(hotel)
-    if (res.length == 0) {
+    if (res.length == 0) {                              //If the match word is not found then it will print "No hotel" in the output box
         OutputBox.innerHTML = "<p>No Hotel</p>";
     }
+
+    //If the match word is found then it will print the result in the output box with all the details.
     else {
         res.forEach(h => {
             OutputBox.innerHTML += `
-        <div>
-            <h2>${h.HotelName}</h2>
-            <p>City: ${h.City}</p>
-            <p>Rating: ${h.Rating}, Price: ${h.Price}</p>
-            <button onclick ="Booking()">Booked</button>
-        </div>
+            <div>
+                <h2>${h.HotelName}</h2>
+                <p>City: ${h.City}</p>
+                <p>Rating: ${h.Rating}, Price: ${h.Price}</p>
+                <button id="ConfirmBtn"> Confirm </button>
+            </div>
         `
         });
     }
 
 
-
-    function Booking(hotel) {
+// Confirm box is working properly 
+    function booking() {
         let result = confirm("Press Ok to book the hotel");
-        if (result === true) {
-            ConfirmBox.textContent = "Booked";
+        
+        if (result) {
+            add.textContent = "Booked";
             console.log("Booked done");
         } else {
-            ConfirmBox.textContent = "Cancelled";
+            add.textContent = "Cancelled";
             console.log("Not Booked");
         }
     }
+    // Here we are adding the action to the button which call the booking function 
+    document.getElementById("ConfirmBtn").addEventListener("click", booking);
 }
-
-
-
-
-
 
 
 
